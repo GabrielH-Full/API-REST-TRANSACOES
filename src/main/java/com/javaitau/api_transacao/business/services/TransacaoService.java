@@ -36,12 +36,12 @@ public class TransacaoService {
         listTransacao.clear();
     }
 
-    public List<TransacaoRequestDTO> buscarTransacoes(Integer IntervaloBusca) {
+    public List<TransacaoRequestDTO> buscarTransacoes(Integer intervaloBusca) {
         log.info("Estatistica dos ultimos 60 segundos");
-        OffsetDateTime dataHoraIntervalo= OffsetDateTime.now().minusSeconds(IntervaloBusca);
+        OffsetDateTime dataHoraintervalo= OffsetDateTime.now().minusSeconds(intervaloBusca);
 
         return listTransacao.stream().filter(transacoes -> transacoes.dataHora()
-                .isAfter(dataHoraIntervalo)).toList();
+                .isAfter(dataHoraintervalo)).toList();
     }
 
 
