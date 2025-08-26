@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/transacao")
-@Service
 public class TransacaoController {
 
     @Autowired
