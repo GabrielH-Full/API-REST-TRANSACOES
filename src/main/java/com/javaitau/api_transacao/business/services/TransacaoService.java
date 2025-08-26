@@ -14,35 +14,33 @@ import java.util.List;
 @RequiredArgsConstructor //1 - injeçoes de indepedencias
 @Slf4j
 public class TransacaoService {
-    //armazenamento em memoria por array list
 
     private final List<TransacaoRequestDTO> listTransacao = new ArrayList<>();
 
     public void adicionarTransacao(TransacaoRequestDTO dto) {
-        log.info("Iniciada o processamento de gravar transações");
+        //log.info("Iniciada o processamento de gravar transações{}", dto);
 
         if(dto.dataHora().isAfter(OffsetDateTime.now())){
-            log.error("Data e Hora maiores que o atual");
+         //   log.error("Data e Hora maiores que o atual");
             throw new UnprocessableEntity("data e hora maiores que data e hora atuais");
         }
         if(dto.valor() < 0){
-            log.error("Valor negativo");
+         //   log.error("Valor negativo");
             throw new UnprocessableEntity("Valor nao pode ser negativo");
         }
         listTransacao.add(dto);
     }
 
     public void limoparTransacao() {
+        //log.info("Iniciado o processo de limpeza de transações");
         listTransacao.clear();
     }
 
     public List<TransacaoRequestDTO> buscarTransacoes(Integer intervaloBusca) {
-        log.info("Estatistica dos ultimos 60 segundos");
+       // log.info("Estatistica dos ultimos 60 segundos");
         OffsetDateTime dataHoraintervalo= OffsetDateTime.now().minusSeconds(intervaloBusca);
 
         return listTransacao.stream().filter(transacoes -> transacoes.dataHora()
                 .isAfter(dataHoraintervalo)).toList();
     }
-
-
 }
